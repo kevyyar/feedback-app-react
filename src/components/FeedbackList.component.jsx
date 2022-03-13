@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 
 import FeedbackItem from './FeebackItem.component';
 
-const FeedbackList = ({ feedback }) => {
+const FeedbackList = ({ feedback, onDeleteFeedback }) => {
+    if (!feedback || feedback.length === 0) return <div>No Feedback Data</div>
+
     return (
         <>
             {feedback.map(feedback => (
-                <FeedbackItem key={feedback.id} {...feedback} />
+                <FeedbackItem key={feedback.id} {...feedback} onDeleteFeedback={onDeleteFeedback} />
             ))}
         </>
     );
