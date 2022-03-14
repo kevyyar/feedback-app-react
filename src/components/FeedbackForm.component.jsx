@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import FeedbackContext from '../context/FeedbackContext';
@@ -13,8 +13,15 @@ const FeedbackForm = () => {
     const [btnDisabled, setBtnDisabled] = useState(true)
     const [message, setMessage] = useState('')
 
-    const { onAddFeedback } = useContext(FeedbackContext)
+    const { onAddFeedback, onUpdateFeedback, feedbackEdit } = useContext(FeedbackContext)
 
+    useEffect(() => {
+        if (feedbackEdit.edit === true) {
+            setBtnDisabled(false)
+            setText(feedbackEdit.item.text)
+            setRating(feedbackEdit.item.rating)
+        }
+    }, [feedbackEdit])
 
     const handleTextChange = (e) => {
         if (text === '') {
@@ -39,7 +46,11 @@ const FeedbackForm = () => {
                 rating
             }
 
-            onAddFeedback(newFeedback);
+            if (feedbackEdit.edit === true) {
+                onUpdateFeedback(feedbackEdit.item.id, newFeedback)
+            } else {
+                onAddFeedback(newFeedback);
+            }
         }
 
         setText('')
