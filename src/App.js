@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import Header from './components/Header.component';
-// import FeedbackItem from './components/FeebackItem.component';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import FeedbackData from './data/FeedbackData'
 import FeedbackList from './components/FeedbackList.component';
 import FeedbackStats from './components/FeedbackStats.component';
 import FeedbackForm from './components/FeedbackForm.component';
+import About from './pages/About.component';
+import AboutIconLink from './components/AboutIconLink.component';
 
 function App() {
   const [feedback, setFeedback] = useState(FeedbackData)
@@ -23,14 +25,23 @@ function App() {
   }
 
   return (
-    <>
+    <BrowserRouter>
       <Header />
       <div className="container">
-        <FeedbackForm onAddFeedback={onAddFeedback} />
-        <FeedbackStats feedback={feedback} />
-        <FeedbackList feedback={feedback} onDeleteFeedback={onDeleteFeedback} />
+        <Routes>
+          <Route exact path="/" element={
+            <>
+              <FeedbackForm onAddFeedback={onAddFeedback} />
+              <FeedbackStats feedback={feedback} />
+              <FeedbackList feedback={feedback} onDeleteFeedback={onDeleteFeedback} />
+            </>
+          }>
+          </Route>
+          <Route path="/about" element={<About />} />
+        </Routes>
+        <AboutIconLink />
       </div>
-    </>
+    </BrowserRouter>
   );
 }
 

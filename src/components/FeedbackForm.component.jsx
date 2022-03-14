@@ -38,7 +38,6 @@ const FeedbackForm = ({ onAddFeedback }) => {
         }
 
         setText('')
-        setRating(10)
     }
     return (
         <Card>
