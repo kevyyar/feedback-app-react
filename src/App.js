@@ -16,11 +16,17 @@ function App() {
     }
   }
 
+  const onAddFeedback = (feedback) => {
+    setFeedback((prevFeedback) => {
+      return [feedback, ...prevFeedback]
+    })
+  }
+
   return (
     <>
       <Header />
       <div className="container">
-        <FeedbackForm />
+        <FeedbackForm onAddFeedback={onAddFeedback} />
         <FeedbackStats feedback={feedback} />
         <FeedbackList feedback={feedback} onDeleteFeedback={onDeleteFeedback} />
       </div>
