@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+
+import FeedbackContext from '../context/FeedbackContext';
 
 import Card from "./UI/Card.component";
 import Button from './UI/Button.component';
 import RatingSelect from './RatingSelect.component';
 
-const FeedbackForm = ({ onAddFeedback }) => {
+const FeedbackForm = () => {
     const [text, setText] = useState('')
     const [rating, setRating] = useState(0)
     const [btnDisabled, setBtnDisabled] = useState(true)
     const [message, setMessage] = useState('')
+
+    const { onAddFeedback } = useContext(FeedbackContext)
+
 
     const handleTextChange = (e) => {
         if (text === '') {
