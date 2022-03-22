@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import FeedbackContext from '../context/FeedbackContext';
 
@@ -16,11 +15,11 @@ const FeedbackForm = () => {
     const { onAddFeedback, onUpdateFeedback, feedbackEdit } = useContext(FeedbackContext)
 
     useEffect(() => {
-        if (feedbackEdit.edit === true) {
-            setBtnDisabled(false)
-            setText(feedbackEdit.item.text)
-            setRating(feedbackEdit.item.rating)
-        }
+        // if (feedbackEdit.edit === true) {
+        //     setBtnDisabled(false)
+        //     setText(feedbackEdit.item.text)
+        //     setRating(feedbackEdit.item.rating)
+        // }
     }, [feedbackEdit])
 
     const handleTextChange = (e) => {
@@ -41,7 +40,6 @@ const FeedbackForm = () => {
         e.preventDefault()
         if (text.trim().length > 10) {
             const newFeedback = {
-                id: uuidv4(),
                 text,
                 rating
             }
